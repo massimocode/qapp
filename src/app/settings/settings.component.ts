@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { SettingsService } from "../../services/settings-service";
 
 @Component({
@@ -7,7 +8,10 @@ import { SettingsService } from "../../services/settings-service";
   styleUrls: ["./settings.component.css"]
 })
 export class SettingsComponent implements OnInit {
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    private settingsService: SettingsService,
+    private location: Location
+  ) {}
 
   ngOnInit() {}
 
@@ -21,5 +25,9 @@ export class SettingsComponent implements OnInit {
 
   decreaseFontSize() {
     this.settingsService.setFontSize(this.fontSize - 2);
+  }
+
+  back() {
+    this.location.back();
   }
 }

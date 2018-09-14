@@ -17,3 +17,5 @@ We're only implementing Arabic for now - but with a view to support a translatio
 - Add Joz support
 - An about page would be good but not really necessary
 - Add translation support?
+
+// Do a proper navigation menu
