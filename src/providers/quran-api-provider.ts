@@ -9,12 +9,12 @@ export class MockQuranApiProvider implements QuranApiProvider {
   async getSurahs(): Promise<Surah[]> {
     return [
       {
-        id: 1 as SurahID,
+        id: 1,
         name: "Fatiha",
         displayBismillah: false
       },
       {
-        id: 2 as SurahID,
+        id: 2,
         name: "Baqarah",
         displayBismillah: true
       }

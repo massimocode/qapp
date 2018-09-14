@@ -45,5 +45,4 @@ export type Verse = {
   text: string;
 };
 
-// TODO - this isn't so great
-export type SurahID = (number | string) & { _: "SurahID" };
+export type SurahID = number;
