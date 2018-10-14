@@ -2,7 +2,6 @@ import { Http } from "@angular/http";
 import { QuranApiProvider } from "./quran-api-provider";
 import {
   Surah as ServiceSurah,
-  SurahID,
   Verse as ServiceVerse
 } from "../services/content-service";
 import { Injectable } from "@angular/core";
@@ -24,7 +23,7 @@ export class QuranDotComApiProvider implements QuranApiProvider {
     }));
   }
 
-  async getVerses(surahId: SurahID): Promise<ServiceVerse[]> {
+  async getVerses(surahId: number): Promise<ServiceVerse[]> {
     const firstPage = await this.getPageOfVerses(surahId);
     const pages = [Promise.resolve(firstPage)];
 
@@ -40,11 +39,12 @@ export class QuranDotComApiProvider implements QuranApiProvider {
     return (await Promise.all(pages))
       .reduce<Verse[]>((verses, page) => verses.concat(page.verses), [])
       .map<ServiceVerse>(x => ({
+        id: x.id,
         text: x.text_madani
       }));
   }
 
-  private async getPageOfVerses(surahId: SurahID, page = 1) {
+  private async getPageOfVerses(surahId: number, page = 1) {
     return (await this.http
       .get(
         `${
@@ -60,7 +60,7 @@ type ChaptersResponse = {
 };
 
 type Chapter = {
-  id: SurahID;
+  id: number;
   chapter_number: number;
   bismillah_pre: boolean;
   revelation_order: number;

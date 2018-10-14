@@ -11,7 +11,7 @@ import {
 } from "../services/content-service";
 import {
   QuranApiProvider,
-  MockQuranApiProvider
+  StubQuranApiProvider
 } from "../providers/quran-api-provider";
 import { SettingsComponent } from "./settings/settings.component";
 import { QuranViewComponent } from "./quran-view/quran-view.component";
@@ -42,7 +42,7 @@ import {
   providers: [
     { provide: ContentService, useClass: ContentServiceImplementation },
     { provide: SettingsService, useClass: SettingsServiceImplementation },
-    { provide: QuranApiProvider, useClass: MockQuranApiProvider /* Or QuranDotComApiProvider */ },
+    { provide: QuranApiProvider, useClass: StubQuranApiProvider /* Or QuranDotComApiProvider */ },
     { provide: StorageProvider, useClass: BrowserStorageProvider /* or MockStorageProvider */ },
     { provide: StyleProvider, useClass: BrowserStyleProvider }
   ],

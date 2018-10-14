@@ -1,11 +1,11 @@
-import { Surah, SurahID, Verse } from "../services/content-service";
+import { Surah, Verse } from "../services/content-service";
 
 export abstract class QuranApiProvider {
   abstract getSurahs(): Promise<Surah[]>;
-  abstract getVerses(surahId: SurahID): Promise<Verse[]>;
+  abstract getVerses(surahId: number): Promise<Verse[]>;
 }
 
-export class MockQuranApiProvider implements QuranApiProvider {
+export class StubQuranApiProvider implements QuranApiProvider {
   async getSurahs(): Promise<Surah[]> {
     return [
       {
@@ -20,12 +20,21 @@ export class MockQuranApiProvider implements QuranApiProvider {
       }
     ];
   }
-  async getVerses(surahId: SurahID): Promise<Verse[]> {
+  async getVerses(surahId: number): Promise<Verse[]> {
     if (surahId === 1) {
-      return [{ text: "Bism" }, { text: "Alham" }];
+      return [
+        { id: 1, text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
+        { id: 2, text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ" }
+      ];
     }
     if (surahId === 2) {
-      return [{ text: "Alif lam mim" }, { text: "Zaleka" }];
+      return [
+        { id: 1, text: "الم" },
+        {
+          id: 2,
+          text: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ"
+        }
+      ];
     }
     throw new Error(`Surah with ID ${surahId} not found`);
   }
