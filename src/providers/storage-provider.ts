@@ -2,6 +2,7 @@
 export abstract class StorageProvider {
   abstract set<T>(key: string, data: T): void;
   abstract get<T>(key: string): T | null;
+  abstract resetAll(): void;
 }
 
 export class MockStorageProvider implements StorageProvider {
@@ -14,6 +15,10 @@ export class MockStorageProvider implements StorageProvider {
   get(key: string) {
     const data = this.storage.get(key);
     return data !== undefined ? JSON.parse(data) : null;
+  }
+
+  resetAll() {
+    this.storage.clear();
   }
 }
 
@@ -35,5 +40,8 @@ export class BrowserStorageProvider implements StorageProvider {
   get(key: string) {
     const data = this.storage.getItem(key);
     return data !== null ? JSON.parse(data) : null;
+  }
+  resetAll(): void {
+    this.storage.clear();
   }
 }

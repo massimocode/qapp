@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { SettingsService } from "../../services/settings-service";
+import { StorageProvider } from "src/providers/storage-provider";
 
 @Component({
   selector: "app-settings",
@@ -10,7 +11,8 @@ import { SettingsService } from "../../services/settings-service";
 export class SettingsComponent implements OnInit {
   constructor(
     private settingsService: SettingsService,
-    private location: Location
+    private location: Location,
+    private storageProvider: StorageProvider
   ) {}
 
   ngOnInit() {}
@@ -29,5 +31,13 @@ export class SettingsComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  resetApp() {
+    const message =
+      "Are you sure you want to reset the app? This will wipe any settings and downloaded content!";
+    if (window.confirm(message)) {
+      this.storageProvider.resetAll();
+    }
   }
 }
