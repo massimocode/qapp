@@ -1,4 +1,4 @@
 <p class="arabic" *ngIf="hasBismillah">Bism</p>
-<p class="arabic" *ngFor="let verse of verses">
-  {{verse.text}}
+<p class="arabic" *ngFor="let verse of verses; index as index;" id="verse_{{index}}" routerLink="/surah/{{surah.id}}/{{index}}">
+  {{index + 1}} {{verse.text}}
 </p>

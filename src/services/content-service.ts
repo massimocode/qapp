@@ -4,7 +4,7 @@ import { StorageProvider } from "../providers/storage-provider";
 
 export abstract class ContentService {
   abstract getSurahs(): Promise<Surah[]>;
-  abstract getVerses(surahId: SurahID): Promise<Verse[]>;
+  abstract getVerses(surahId: number): Promise<Verse[]>;
 }
 
 @Injectable()
@@ -24,7 +24,7 @@ export class ContentServiceImplementation implements ContentService {
     return surahs;
   }
 
-  async getVerses(surahId: SurahID): Promise<Verse[]> {
+  async getVerses(surahId: number): Promise<Verse[]> {
     const key = `verses_${surahId}`;
     let verses = this.storageProvider.get<Verse[]>(key);
     if (verses === null) {
@@ -36,13 +36,12 @@ export class ContentServiceImplementation implements ContentService {
 }
 
 export type Surah = {
-  id: SurahID;
+  id: number;
   name: string;
   displayBismillah: boolean;
 };
 
 export type Verse = {
+  id: number;
   text: string;
 };
-
-export type SurahID = number;
