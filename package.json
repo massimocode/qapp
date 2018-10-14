@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "start": "ng serve --prod --port $PORT",
+    "postinstall": "ng build --aot --prod",
     "build": "ng build",
     "lint": "ng lint"
   },
