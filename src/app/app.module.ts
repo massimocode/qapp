@@ -10,17 +10,17 @@ import {
   ContentServiceImplementation
 } from "../services/content-service";
 import {
-  QuranApiProvider,
-  StubQuranApiProvider
+  QuranApiProvider
+  // StubQuranApiProvider
 } from "../providers/quran-api-provider";
 import { SettingsComponent } from "./settings/settings.component";
 import { QuranViewComponent } from "./quran-view/quran-view.component";
 import {
   StorageProvider,
-  BrowserStorageProvider,
+  BrowserStorageProvider
   // MockStorageProvider
 } from "../providers/storage-provider";
-// import { QuranDotComApiProvider } from "../providers/quran-dot-com-api-provider";
+import { QuranDotComApiProvider } from "../providers/quran-dot-com-api-provider";
 import { routes } from "../routing/routes";
 import {
   SettingsService,
@@ -42,8 +42,14 @@ import {
   providers: [
     { provide: ContentService, useClass: ContentServiceImplementation },
     { provide: SettingsService, useClass: SettingsServiceImplementation },
-    { provide: QuranApiProvider, useClass: StubQuranApiProvider /* Or QuranDotComApiProvider */ },
-    { provide: StorageProvider, useClass: BrowserStorageProvider /* or MockStorageProvider */ },
+    {
+      provide: QuranApiProvider,
+      useClass: QuranDotComApiProvider /* Or StubQuranApiProvider */
+    },
+    {
+      provide: StorageProvider,
+      useClass: BrowserStorageProvider /* or MockStorageProvider */
+    },
     { provide: StyleProvider, useClass: BrowserStyleProvider }
   ],
   bootstrap: [AppComponent]
