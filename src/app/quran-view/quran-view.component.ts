@@ -18,10 +18,21 @@ export class QuranViewComponent implements OnInit {
 
   async ngOnInit() {
     await this.route.params.subscribe(async params => {
-      const id = +params.id;
+      const surahId = +params.surah;
       this.surah =
-        (await this.contentService.getSurahs()).find(x => x.id === id) || null;
-      this.verses = await this.contentService.getVerses(id);
+        (await this.contentService.getSurahs()).find(x => x.id === surahId) ||
+        null;
+      this.verses = await this.contentService.getVerses(surahId);
+
+      if (params.verse) {
+        const verseId = +params.verse;
+        setTimeout(() => {
+          const verse = document.getElementById(`verse_${verseId}`);
+          if (verse) {
+            verse.scrollIntoView();
+          }
+        });
+      }
     });
   }
 

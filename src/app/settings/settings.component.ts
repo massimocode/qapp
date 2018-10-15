@@ -22,11 +22,11 @@ export class SettingsComponent implements OnInit {
   }
 
   increaseFontSize() {
-    this.settingsService.setFontSize(this.fontSize + 2);
+    this.settingsService.setFontSize(this.fontSize + 4);
   }
 
   decreaseFontSize() {
-    this.settingsService.setFontSize(this.fontSize - 2);
+    this.settingsService.setFontSize(this.fontSize - 4);
   }
 
   back() {
@@ -34,10 +34,6 @@ export class SettingsComponent implements OnInit {
   }
 
   resetApp() {
-    const message =
-      "Are you sure you want to reset the app? This will wipe any settings and downloaded content!";
-    if (window.confirm(message)) {
-      this.storageProvider.resetAll();
-    }
+    this.storageProvider.resetAll();
   }
 }

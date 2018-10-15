@@ -39,7 +39,7 @@ export class QuranDotComApiProvider implements QuranApiProvider {
     return (await Promise.all(pages))
       .reduce<Verse[]>((verses, page) => verses.concat(page.verses), [])
       .map<ServiceVerse>(x => ({
-        id: x.id,
+        id: x.verse_number,
         text: x.text_madani
       }));
   }

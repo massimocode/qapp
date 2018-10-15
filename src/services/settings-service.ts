@@ -8,7 +8,7 @@ export abstract class SettingsService {
   abstract setFontSize(size: number): void;
 }
 
-const DEFAULT_FONT_SIZE = 28;
+const DEFAULT_FONT_SIZE = 36;
 const FONT_SIZE_KEY = "font_size";
 
 @Injectable()

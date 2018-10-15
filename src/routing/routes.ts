@@ -5,7 +5,8 @@ import { SettingsComponent } from "../app/settings/settings.component";
 
 export const routes: Routes = [
   { path: "settings", component: SettingsComponent },
-  { path: "surah/:id", component: QuranViewComponent },
+  { path: "surah/:surah", component: QuranViewComponent },
+  { path: "surah/:surah/verse/:verse", component: QuranViewComponent },
   {
     path: "surahs",
     component: SurahsListComponent,
