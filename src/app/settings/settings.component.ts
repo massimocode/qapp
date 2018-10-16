@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { SettingsService } from "../../services/settings-service";
 import { StorageProvider } from "src/providers/storage-provider";
+import { ContentService } from "src/services/content-service";
 
 @Component({
   selector: "app-settings",
@@ -12,7 +13,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private settingsService: SettingsService,
     private location: Location,
-    private storageProvider: StorageProvider
+    private storageProvider: StorageProvider,
+    private contentService: ContentService
   ) {}
 
   ngOnInit() {}
@@ -31,6 +33,13 @@ export class SettingsComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  async preloadContent() {
+    const surahs = await this.contentService.getSurahs();
+    for (let surah of surahs) {
+      await this.contentService.getVerses(surah.id);
+    }
   }
 
   resetApp() {

@@ -3,9 +3,15 @@
 <h2>Font size</h2>
 <button (click)="increaseFontSize()">+</button> <button (click)="decreaseFontSize()">-</button>
 
-<p>Example:</p>
+<p class="note">Example:</p>
 <p class="arabic">بسم الله الرحمن الرحیم</p>
 
-<button (click)="resetApp()">Reset App</button>
+
+<h2>Storage</h2>
+<button (click)="preloadContent()">Preload all content</button>
+<p class="note">This may take some time</p>
+
+<button (click)="resetApp()">Delete content and settings</button>
+<p class="note">This may be useful if the application is not behaving as expected</p>
 
 <button (click)="back()">Back</button>

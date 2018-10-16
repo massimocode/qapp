@@ -2,3 +2,5 @@
 <p class="arabic" *ngFor="let verse of verses" id="verse_{{verse.id}}" routerLink="/surah/{{surah.id}}/verse/{{verse.id}}">
   <span class="verse-number">{{verse.id}}</span>{{verse.text}}
 </p>
+<button routerLink="/surah/{{surah.id}}">Next Surah</button>
+<button routerLink="/surahs">Back to Surahs</button>
