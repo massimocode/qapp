@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Scheherazade');
+@import url("https://fonts.googleapis.com/css?family=Scheherazade");
+@import url("../node_modules/normalize.css/normalize.css");
 .arabic {
-  font-family: 'Scheherazade', serif;
+  font-family: "Scheherazade", serif;
   direction: rtl;
+}
+body {
+  padding: 5px;
+  line-height: 1.5;
+}
+p {
+  margin: 10px 0;
 }

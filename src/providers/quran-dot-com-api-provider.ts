@@ -27,7 +27,6 @@ export class QuranDotComApiProvider implements QuranApiProvider {
     const firstPage = await this.getPageOfVerses(surahId);
     const pages = [Promise.resolve(firstPage)];
 
-    console.log(firstPage.meta.total_pages);
     for (
       let pageNumber = 2;
       pageNumber <= firstPage.meta.total_pages;
