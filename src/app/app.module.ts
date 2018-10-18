@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { HttpModule } from "@angular/http";
 
@@ -30,15 +31,26 @@ import {
   StyleProvider,
   BrowserStyleProvider
 } from "../providers/style-provider";
+import { ResultsComponent } from "./results/results.component";
+import {
+  ClipboardProvider,
+  BrowserClipboardProvider
+} from "src/providers/clipboard-provider";
 
 @NgModule({
   declarations: [
     AppComponent,
     SurahsListComponent,
     SettingsComponent,
-    QuranViewComponent
+    QuranViewComponent,
+    ResultsComponent
   ],
-  imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(routes)
+  ],
   providers: [
     { provide: ContentService, useClass: ContentServiceImplementation },
     { provide: SettingsService, useClass: SettingsServiceImplementation },
@@ -50,7 +62,8 @@ import {
       provide: StorageProvider,
       useClass: BrowserStorageProvider /* or MockStorageProvider */
     },
-    { provide: StyleProvider, useClass: BrowserStyleProvider }
+    { provide: StyleProvider, useClass: BrowserStyleProvider },
+    { provide: ClipboardProvider, useClass: BrowserClipboardProvider }
   ],
   bootstrap: [AppComponent]
 })

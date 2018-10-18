@@ -44,4 +44,5 @@ export type Surah = {
 export type Verse = {
   id: number;
   text: string;
+  pageNumber: number;
 };

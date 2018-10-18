@@ -23,16 +23,21 @@ export class StubQuranApiProvider implements QuranApiProvider {
   async getVerses(surahId: number): Promise<Verse[]> {
     if (surahId === 1) {
       return [
-        { id: 1, text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ" },
-        { id: 2, text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ" }
+        {
+          id: 1,
+          text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+          pageNumber: 1
+        },
+        { id: 2, text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", pageNumber: 1 }
       ];
     }
     if (surahId === 2) {
       return [
-        { id: 1, text: "الم" },
+        { id: 1, text: "الم", pageNumber: 2 },
         {
           id: 2,
-          text: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ"
+          text: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
+          pageNumber: 2
         }
       ];
     }
