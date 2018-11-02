@@ -19,9 +19,9 @@ export class QuranViewComponent implements OnInit {
   async ngOnInit() {
     await this.route.params.subscribe(async params => {
       const surahId = +params.surah;
-      this.surah =
-        (await this.contentService.getSurahs()).find(x => x.id === surahId) ||
-        null;
+      this.surah = (await this.contentService.getSurahs()).find(
+        x => x.id === surahId
+      )!;
       this.verses = await this.contentService.getVerses(surahId);
 
       if (params.verse) {

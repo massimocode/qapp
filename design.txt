@@ -1,21 +1,10 @@
-We're only implementing Arabic for now - but with a view to support a translation soon (any language) so this must be taken into consideration when building the service DTOs etc. We might need to support RTL in the translation.
-
-- A router to hold state, forwards/backwards etc... i.e. between different surahs and ayehs and the settings page and the surahs list.
-- A service which returns.
-- A local storage provider - at some point in time we want this to fall back to session storage if local storage isn't available.
-- An API provider which gets us the data we want (content).
-
-- The default view is the list of surahs
-- A menu component to be able to go to the list of surahs / list of joz / settings, etc.
-- A global component that shows a loading indicator overlay when any API requests are in flight.
-- A component to show a list of surahs. Later on we would like to add Joz support.
-- A component which will show content. The content to be shown will be determined by the parameters passed to it.
-- A settings component to control things like font-size and to flush local storage.
-- A way to remember where you are on a page... if we went by the router then we will always take you back to the top of the ayeh, is this desirable? I think so, most of the ayehs can be read in one go and if you stop mid ayeh then you'll probably not be closing the tab... basically the complexity of trying to deal with resuming mid ayeh is probably not worth the frequency of the use case at this time. Clicking on an ayeh will ensure you resume on that ayeh - this should probably be indicated by changing the ayeh's colour.
-- We need to handle CORS so we can request data from a live Quran API
-
-- Add Joz support
-- An about page would be good but not really necessary
-- Add translation support?
-
-// Do a proper navigation menu
+- Work on the NativeScript version
+- Better way of remembering where you are - why? how would this be done?
+- Look into a better font/rendering option
+- Do a proper navigation menu
+- Add Joz support (indicators + list)
+- Sajdeh indicators
+- Discreet loading indicator (when requests in flight)
+- Deployment to a proper domain with https & uptimerobot
+- Add translation support
+- About page

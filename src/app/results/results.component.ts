@@ -27,10 +27,14 @@ export class ResultsComponent {
     }
     this.feelText = "loading";
     const pageResult = results.get(+feelPage)!;
+    const surahs = await this.contentService.getSurahs();
     const verses = await this.contentService.getVerses(pageResult.surahId);
-    if (this.feelPage === feelPage) {
-      this.feelText = verses.find(x => x.id === pageResult.verse)!.text;
+    if (this.feelPage !== feelPage) {
+      return;
     }
+    const surah = surahs.find(x => x.id === pageResult.surahId)!;
+    const verse = verses.find(x => x.id === pageResult.verse)!;
+    this.feelText = `سورة ${surah.name} - ${verse.text}`;
   }
 
   async refreshTark() {
@@ -41,10 +45,14 @@ export class ResultsComponent {
     }
     this.tarkText = "loading";
     const pageResult = results.get(+tarkPage)!;
+    const surahs = await this.contentService.getSurahs();
     const verses = await this.contentService.getVerses(pageResult.surahId);
-    if (this.tarkPage === tarkPage) {
-      this.tarkText = verses.find(x => x.id === pageResult.verse)!.text;
+    if (this.tarkPage !== tarkPage) {
+      return;
     }
+    const surah = surahs.find(x => x.id === pageResult.surahId)!;
+    const verse = verses.find(x => x.id === pageResult.verse)!;
+    this.tarkText = `سورة ${surah.name} - ${verse.text}`;
   }
 
   copy(value: string) {
