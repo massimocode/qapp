@@ -34,7 +34,7 @@ export class ResultsComponent {
     }
     const surah = surahs.find(x => x.id === pageResult.surahId)!;
     const verse = verses.find(x => x.id === pageResult.verse)!;
-    this.feelText = `سورة ${surah.name} - ${verse.text}`;
+    this.feelText = `سورة ${surah.name} - ص ${feelPage} - ${verse.text}`;
   }
 
   async refreshTark() {
@@ -52,7 +52,7 @@ export class ResultsComponent {
     }
     const surah = surahs.find(x => x.id === pageResult.surahId)!;
     const verse = verses.find(x => x.id === pageResult.verse)!;
-    this.tarkText = `سورة ${surah.name} - ${verse.text}`;
+    this.tarkText = `سورة ${surah.name} - ص ${tarkPage} - ${verse.text}`;
   }
 
   copy(value: string) {
