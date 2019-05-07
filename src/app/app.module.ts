@@ -36,11 +36,13 @@ import {
   ClipboardProvider,
   BrowserClipboardProvider
 } from "src/providers/clipboard-provider";
+import { JuzsListComponent } from "./juzs-list/juzs-list.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SurahsListComponent,
+    JuzsListComponent,
     SettingsComponent,
     QuranViewComponent,
     ResultsComponent

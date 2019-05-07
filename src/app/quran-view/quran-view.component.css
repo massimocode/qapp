@@ -1,4 +1,5 @@
-.verse-number {
+.verse-number,
+.juz-marker {
   border-radius: 50%;
   border: 2px gray solid;
   display: inline-block;
@@ -10,4 +11,10 @@
   margin-left: 10px;
   text-align: center;
   width: 35px;
+}
+
+.juz-marker {
+  color: white;
+  border-color: green;
+  background-color: green;
 }

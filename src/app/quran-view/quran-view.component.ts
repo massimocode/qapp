@@ -10,6 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 export class QuranViewComponent implements OnInit {
   verses: Verse[] | null = null;
   surah: Surah | null = null;
+  juzVerses: Set<number> = new Set();
 
   constructor(
     private contentService: ContentService,
@@ -23,6 +24,12 @@ export class QuranViewComponent implements OnInit {
         x => x.id === surahId
       )!;
       this.verses = await this.contentService.getVerses(surahId);
+
+      this.juzVerses = new Set<number>(
+        (await this.contentService.getJuzs())
+          .filter(x => x.surah === surahId)
+          .map(x => x.verse)
+      );
 
       if (params.verse) {
         const verseId = +params.verse;
@@ -38,5 +45,9 @@ export class QuranViewComponent implements OnInit {
 
   get hasBismillah() {
     return this.surah !== null && this.surah.displayBismillah;
+  }
+
+  displayJuzMarker(verse: Verse): boolean {
+    return this.juzVerses.has(verse.id);
   }
 }

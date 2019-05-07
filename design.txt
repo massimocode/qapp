@@ -2,7 +2,6 @@
 - Better way of remembering where you are - why? how would this be done?
 - Look into a better font/rendering option
 - Do a proper navigation menu
-- Add Joz support (indicators + list)
 - Sajdeh indicators
 - Discreet loading indicator (when requests in flight)
 - Deployment to a proper domain with https & uptimerobot

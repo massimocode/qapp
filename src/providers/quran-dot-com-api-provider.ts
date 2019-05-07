@@ -2,7 +2,8 @@ import { Http } from "@angular/http";
 import { QuranApiProvider } from "./quran-api-provider";
 import {
   Surah as ServiceSurah,
-  Verse as ServiceVerse
+  Verse as ServiceVerse,
+  Juz as ServiceJuz
 } from "../services/content-service";
 import { Injectable } from "@angular/core";
 
@@ -52,6 +53,24 @@ export class QuranDotComApiProvider implements QuranApiProvider {
         }/chapters/${surahId}/verses?limit=50&text_type=image&page=${page}`
       )
       .toPromise()).json() as VersesResponse;
+  }
+
+  async getJuzs(): Promise<ServiceJuz[]> {
+    const response = (await this.http
+      .get(`${this.baseUrl}/juzs`)
+      .toPromise()).json() as JuzsResponse;
+
+    return response.juzs.map<ServiceJuz>(x => {
+      const surahNumbers = Object.keys(x.verse_mapping).map(key =>
+        parseInt(key, 10)
+      );
+      const startSurah = Math.min(...surahNumbers);
+      return {
+        id: x.juz_number,
+        surah: startSurah,
+        verse: parseInt(x.verse_mapping[startSurah].split("-")[0])
+      };
+    });
   }
 }
 
@@ -152,4 +171,16 @@ type Meta = {
   prev_page?: any;
   total_pages: number;
   total_count: number;
+};
+
+type JuzsResponse = {
+  juzs: Juz[];
+};
+
+type Juz = {
+  id: number;
+  juz_number: number;
+  verse_mapping: {
+    [chapter: number]: string;
+  };
 };

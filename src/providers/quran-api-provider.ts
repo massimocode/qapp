@@ -1,8 +1,9 @@
-import { Surah, Verse } from "../services/content-service";
+import { Surah, Verse, Juz } from "../services/content-service";
 
 export abstract class QuranApiProvider {
   abstract getSurahs(): Promise<Surah[]>;
   abstract getVerses(surahId: number): Promise<Verse[]>;
+  abstract getJuzs(): Promise<Juz[]>;
 }
 
 export class StubQuranApiProvider implements QuranApiProvider {
@@ -42,5 +43,24 @@ export class StubQuranApiProvider implements QuranApiProvider {
       ];
     }
     throw new Error(`Surah with ID ${surahId} not found`);
+  }
+  async getJuzs(): Promise<Juz[]> {
+    return [
+      {
+        id: 1,
+        surah: 1,
+        verse: 1
+      },
+      {
+        id: 2,
+        surah: 2,
+        verse: 142
+      },
+      {
+        id: 3,
+        surah: 2,
+        verse: 253
+      }
+    ];
   }
 }

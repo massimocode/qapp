@@ -5,6 +5,7 @@ import { StorageProvider } from "../providers/storage-provider";
 export abstract class ContentService {
   abstract getSurahs(): Promise<Surah[]>;
   abstract getVerses(surahId: number): Promise<Verse[]>;
+  abstract getJuzs(): Promise<Juz[]>;
 }
 
 @Injectable()
@@ -33,6 +34,16 @@ export class ContentServiceImplementation implements ContentService {
     }
     return verses;
   }
+
+  async getJuzs(): Promise<Juz[]> {
+    const key = "juzs";
+    let juzs = this.storageProvider.get<Juz[]>(key);
+    if (juzs === null) {
+      juzs = await this.quranApiProvider.getJuzs();
+      this.storageProvider.set(key, juzs);
+    }
+    return juzs;
+  }
 }
 
 export type Surah = {
@@ -45,4 +56,10 @@ export type Verse = {
   id: number;
   text: string;
   pageNumber: number;
+};
+
+export type Juz = {
+  id: number;
+  surah: number;
+  verse: number;
 };
