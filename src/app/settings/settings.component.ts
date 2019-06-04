@@ -36,6 +36,7 @@ export class SettingsComponent implements OnInit {
   }
 
   async preloadContent() {
+    await this.contentService.getJuzs();
     const surahs = await this.contentService.getSurahs();
     for (let surah of surahs) {
       await this.contentService.getVerses(surah.id);
