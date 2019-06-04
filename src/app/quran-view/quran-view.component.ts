@@ -34,9 +34,13 @@ export class QuranViewComponent implements OnInit {
       if (params.verse) {
         const verseId = +params.verse;
         setTimeout(() => {
-          const verse = document.getElementById(`verse_${verseId}`);
-          if (verse) {
-            verse.scrollIntoView();
+          if (verseId === 1) {
+            window.scrollTo(0, 0);
+          } else {
+            const verse = document.getElementById(`verse_${verseId}`);
+            if (verse) {
+              verse.scrollIntoView();
+            }
           }
         });
       }

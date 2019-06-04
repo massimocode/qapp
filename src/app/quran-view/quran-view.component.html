@@ -1,7 +1,7 @@
 <p class="arabic" *ngIf="hasBismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-<p class="arabic" *ngFor="let verse of verses" id="verse_{{verse.id}}" routerLink="/surah/{{surah.id}}/verse/{{verse.id}}">
+<p class="arabic" *ngFor="let verse of verses" id="verse_{{verse.id}}">
   <span *ngIf="displayJuzMarker(verse)" class="juz-marker">Juz</span>
-  <span class="verse-number">{{verse.id}}</span>{{verse.text}}
+  <span class="verse-number" routerLink="/surah/{{surah.id}}/verse/{{verse.id}}">{{verse.id}}</span>{{verse.text}}
 </p>
-<button *ngIf="surah" routerLink="/surah/{{surah.id + 1}}">Next Surah</button>
+<button *ngIf="surah" routerLink="/surah/{{surah.id + 1}}/verse/1">Next Surah</button>
 <button routerLink="/surahs">Back to Surahs</button>
