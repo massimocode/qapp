@@ -1,4 +1,27 @@
-<button routerLink="/settings">Settings</button>
-<button routerLink="/surahs">Surahs</button>
-<button routerLink="/juzs">Juzs</button>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="navigation">
+    <div class="row">
+      <div class="col-xs-6 col-sm-3">
+        <button class="btn btn-primary btn-block" routerLink="/surahs">
+          Surahs
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <button class="btn btn-primary btn-block" routerLink="/juzs">
+          Juzs
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <button class="btn btn-primary btn-block" routerLink="/results">
+          Results
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-3">
+        <button class="btn btn-primary btn-block" routerLink="/settings">
+          Settings
+        </button>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

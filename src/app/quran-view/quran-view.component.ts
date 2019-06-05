@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { ContentService, Verse, Surah } from "../../services/content-service";
+import {
+  ContentService,
+  Verse,
+  Surah,
+  Juz
+} from "../../services/content-service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -10,7 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 export class QuranViewComponent implements OnInit {
   verses: Verse[] | null = null;
   surah: Surah | null = null;
-  juzVerses: Set<number> = new Set();
+  juzVerses: Map<number, Juz> = new Map();
 
   constructor(
     private contentService: ContentService,
@@ -25,17 +30,17 @@ export class QuranViewComponent implements OnInit {
       )!;
       this.verses = await this.contentService.getVerses(surahId);
 
-      this.juzVerses = new Set<number>(
+      this.juzVerses = new Map<number, Juz>(
         (await this.contentService.getJuzs())
           .filter(x => x.surah === surahId)
-          .map(x => x.verse)
+          .map<[number, Juz]>(x => [x.verse, x])
       );
 
       if (params.verse) {
         const verseId = +params.verse;
         setTimeout(() => {
           if (verseId === 1) {
-            window.scrollTo(0, 0);
+            this.backToTop();
           } else {
             const verse = document.getElementById(`verse_${verseId}`);
             if (verse) {
@@ -47,11 +52,19 @@ export class QuranViewComponent implements OnInit {
     });
   }
 
+  backToTop() {
+    window.scrollTo(0, 0);
+  }
+
   get hasBismillah() {
     return this.surah !== null && this.surah.displayBismillah;
   }
 
   displayJuzMarker(verse: Verse): boolean {
     return this.juzVerses.has(verse.id);
+  }
+
+  getJuzNumber(verse: Verse): number {
+    return this.juzVerses.get(verse.id)!.id;
   }
 }

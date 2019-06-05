@@ -1,9 +1,27 @@
 <h2 class="arabic">فعل</h2>
-<input type="number" pattern="[0-9]*" [(ngModel)]="feelPage" min="1" max="604" (change)="refreshFeel()" placeholder="Enter page #">
-<p class="arabic" (click)="copy(feelText)">{{feelText}}</p>
+<input
+  class="form-control"
+  type="number"
+  pattern="[0-9]*"
+  [(ngModel)]="feelPage"
+  min="1"
+  max="604"
+  (change)="refreshFeel()"
+  placeholder="Enter page #"
+/>
+<p class="arabic" (click)="copy(feelText)">{{ feelText }}</p>
 
 <h2 class="arabic">ترک</h2>
-<input type="number" pattern="[0-9]*" [(ngModel)]="tarkPage" min="1" max="604" (change)="refreshTark()" placeholder="Enter page #">
-<p class="arabic" (click)="copy(tarkText)">{{tarkText}}</p>
+<input
+  class="form-control"
+  type="number"
+  pattern="[0-9]*"
+  [(ngModel)]="tarkPage"
+  min="1"
+  max="604"
+  (change)="refreshTark()"
+  placeholder="Enter page #"
+/>
+<p class="arabic" (click)="copy(tarkText)">{{ tarkText }}</p>
 
-<button (click)="copyAll()">Copy all</button>
+<button class="btn btn-success pull-right" (click)="copyAll()">Copy all</button>

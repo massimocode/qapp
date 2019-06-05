@@ -1,7 +1,30 @@
-<p class="arabic" *ngIf="hasBismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-<p class="arabic" *ngFor="let verse of verses" id="verse_{{verse.id}}">
-  <span *ngIf="displayJuzMarker(verse)" class="juz-marker">Juz</span>
-  <span class="verse-number" routerLink="/surah/{{surah.id}}/verse/{{verse.id}}">{{verse.id}}</span>{{verse.text}}
+<h1 *ngIf="surah">{{ surah.id }} - {{ surah.name }}</h1>
+<p class="arabic" *ngIf="hasBismillah">
+  بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 </p>
-<button *ngIf="surah" routerLink="/surah/{{surah.id + 1}}/verse/1">Next Surah</button>
-<button routerLink="/surahs">Back to Surahs</button>
+<p class="arabic" *ngFor="let verse of verses" id="verse_{{ verse.id }}">
+  <span *ngIf="displayJuzMarker(verse)" class="juz-marker"
+    >Juz {{ getJuzNumber(verse) }}</span
+  >
+  <span
+    class="verse-number"
+    routerLink="/surah/{{ surah.id }}/verse/{{ verse.id }}"
+    >{{ verse.id }}</span
+  >{{ verse.text }}
+</p>
+<div class="row">
+  <div class="col-xs-6">
+    <button class="btn btn-primary btn-block" (click)="backToTop()">
+      Back to top
+    </button>
+  </div>
+  <div class="col-xs-6">
+    <button
+      class="btn btn-primary btn-block"
+      *ngIf="surah"
+      routerLink="/surah/{{ surah.id + 1 }}/verse/1"
+    >
+      Next Surah
+    </button>
+  </div>
+</div>
