@@ -6,6 +6,9 @@
   <span *ngIf="displayJuzMarker(verse)" class="juz-marker"
     >Juz {{ getJuzNumber(verse) }}</span
   >
+  <span *ngIf="displayPageNumber(verse)" class="page-number"
+    >Page {{ getPageNumber(verse) }}</span
+  >
   <span
     class="verse-number"
     routerLink="/surah/{{ surah.id }}/verse/{{ verse.id }}"

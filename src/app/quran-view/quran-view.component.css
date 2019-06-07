@@ -1,5 +1,6 @@
 .verse-number,
-.juz-marker {
+.juz-marker,
+.page-number {
   border-radius: 2em;
   border: 2px gray solid;
   display: inline-block;
@@ -20,5 +21,12 @@
   color: white;
   border-color: green;
   background-color: green;
+  padding: 0 10px;
+}
+
+.page-number {
+  color: white;
+  border-color: blue;
+  background-color: blue;
   padding: 0 10px;
 }

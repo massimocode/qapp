@@ -16,6 +16,7 @@ export class QuranViewComponent implements OnInit {
   verses: Verse[] | null = null;
   surah: Surah | null = null;
   juzVerses: Map<number, Juz> = new Map();
+  pageNumbers: Map<number, number> = new Map();
 
   constructor(
     private contentService: ContentService,
@@ -35,6 +36,14 @@ export class QuranViewComponent implements OnInit {
           .filter(x => x.surah === surahId)
           .map<[number, Juz]>(x => [x.verse, x])
       );
+
+      let previousPageNumber = 0;
+      for (let verse of this.verses) {
+        if (verse.pageNumber !== previousPageNumber) {
+          this.pageNumbers.set(verse.id, verse.pageNumber);
+        }
+        previousPageNumber = verse.pageNumber;
+      }
 
       if (params.verse) {
         const verseId = +params.verse;
@@ -66,5 +75,13 @@ export class QuranViewComponent implements OnInit {
 
   getJuzNumber(verse: Verse): number {
     return this.juzVerses.get(verse.id)!.id;
+  }
+
+  displayPageNumber(verse: Verse): boolean {
+    return this.pageNumbers.has(verse.id);
+  }
+
+  getPageNumber(verse: Verse): number {
+    return this.pageNumbers.get(verse.id)!;
   }
 }
