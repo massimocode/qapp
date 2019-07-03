@@ -37,6 +37,7 @@ export class QuranViewComponent implements OnInit {
           .map<[number, Juz]>(x => [x.verse, x])
       );
 
+      this.pageNumbers.clear();
       let previousPageNumber = 0;
       for (let verse of this.verses) {
         if (verse.pageNumber !== previousPageNumber) {
