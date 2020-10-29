@@ -9,7 +9,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class QuranDotComApiProvider implements QuranApiProvider {
-  private readonly baseUrl = "https://quran.com/api/api/v3";
+  private readonly baseUrl = "https://api.quran.com/api/v3";
 
   constructor(private http: Http) {}
 
