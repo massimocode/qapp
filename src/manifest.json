@@ -4,6 +4,7 @@
   "start_url": "./results",
   "display": "standalone",
   "background_color": "#fff",
+  "theme_color": "#fff",
   "description": "Some description",
   "icons": [
     {
@@ -15,6 +16,12 @@
       "src": "/assets/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/maskable_icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
