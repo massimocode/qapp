@@ -50,6 +50,7 @@ export type Surah = {
   id: number;
   name: string;
   displayBismillah: boolean;
+  verseCount: number;
 };
 
 export type Verse = {

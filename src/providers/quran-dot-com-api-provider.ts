@@ -3,7 +3,7 @@ import { QuranApiProvider } from "./quran-api-provider";
 import {
   Surah as ServiceSurah,
   Verse as ServiceVerse,
-  Juz as ServiceJuz
+  Juz as ServiceJuz,
 } from "../services/content-service";
 import { Injectable } from "@angular/core";
 
@@ -14,61 +14,61 @@ export class QuranDotComApiProvider implements QuranApiProvider {
   constructor(private http: Http) {}
 
   async getSurahs(): Promise<ServiceSurah[]> {
-    const response: ChaptersResponse = (await this.http
-      .get(`${this.baseUrl}/chapters`)
-      .toPromise()).json();
-    return response.chapters.map<ServiceSurah>(x => ({
+    const response: ChaptersResponse = (
+      await this.http.get(`${this.baseUrl}/chapters`).toPromise()
+    ).json();
+    return response.chapters.map<ServiceSurah>((x) => ({
       id: x.id,
       name: x.name_arabic,
-      displayBismillah: x.bismillah_pre
+      displayBismillah: x.bismillah_pre,
+      verseCount: x.verses_count,
     }));
   }
 
   async getVerses(surahId: number): Promise<ServiceVerse[]> {
-    const firstPage = await this.getPageOfVerses(surahId);
-    const pages = [Promise.resolve(firstPage)];
+    const surahs = await this.getSurahs();
+    const surah = surahs.find((x) => x.id === surahId)!;
 
-    for (
-      let pageNumber = 2;
-      pageNumber <= firstPage.meta.total_pages;
-      pageNumber++
-    ) {
-      pages.push(this.getPageOfVerses(surahId, pageNumber));
+    const pages = [];
+    let pagesToFetch = Math.ceil(surah.verseCount / 50);
+
+    for (let page = 1; page <= pagesToFetch; page++) {
+      pages.push(this.getPageOfVerses(surahId, page));
     }
 
     return (await Promise.all(pages))
       .reduce<Verse[]>((verses, page) => verses.concat(page.verses), [])
-      .map<ServiceVerse>(x => ({
+      .map<ServiceVerse>((x) => ({
         id: x.verse_number,
         text: x.text_madani,
-        pageNumber: x.page_number
+        pageNumber: x.page_number,
       }));
   }
 
   private async getPageOfVerses(surahId: number, page = 1) {
-    return (await this.http
-      .get(
-        `${
-          this.baseUrl
-        }/chapters/${surahId}/verses?limit=50&text_type=image&page=${page}`
-      )
-      .toPromise()).json() as VersesResponse;
+    return (
+      await this.http
+        .get(
+          `${this.baseUrl}/chapters/${surahId}/verses?limit=50&text_type=image&page=${page}`
+        )
+        .toPromise()
+    ).json() as VersesResponse;
   }
 
   async getJuzs(): Promise<ServiceJuz[]> {
-    const response = (await this.http
-      .get(`${this.baseUrl}/juzs`)
-      .toPromise()).json() as JuzsResponse;
+    const response = (
+      await this.http.get(`${this.baseUrl}/juzs`).toPromise()
+    ).json() as JuzsResponse;
 
-    return response.juzs.map<ServiceJuz>(x => {
-      const surahNumbers = Object.keys(x.verse_mapping).map(key =>
+    return response.juzs.map<ServiceJuz>((x) => {
+      const surahNumbers = Object.keys(x.verse_mapping).map((key) =>
         parseInt(key, 10)
       );
       const startSurah = Math.min(...surahNumbers);
       return {
         id: x.juz_number,
         surah: startSurah,
-        verse: parseInt(x.verse_mapping[startSurah].split("-")[0])
+        verse: parseInt(x.verse_mapping[startSurah].split("-")[0]),
       };
     });
   }

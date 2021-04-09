@@ -12,13 +12,15 @@ export class StubQuranApiProvider implements QuranApiProvider {
       {
         id: 1,
         name: "Fatiha",
-        displayBismillah: false
+        displayBismillah: false,
+        verseCount: 2,
       },
       {
         id: 2,
         name: "Baqarah",
-        displayBismillah: true
-      }
+        displayBismillah: true,
+        verseCount: 2,
+      },
     ];
   }
   async getVerses(surahId: number): Promise<Verse[]> {
@@ -27,9 +29,9 @@ export class StubQuranApiProvider implements QuranApiProvider {
         {
           id: 1,
           text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-          pageNumber: 1
+          pageNumber: 1,
         },
-        { id: 2, text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", pageNumber: 1 }
+        { id: 2, text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", pageNumber: 1 },
       ];
     }
     if (surahId === 2) {
@@ -38,8 +40,8 @@ export class StubQuranApiProvider implements QuranApiProvider {
         {
           id: 2,
           text: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
-          pageNumber: 2
-        }
+          pageNumber: 2,
+        },
       ];
     }
     throw new Error(`Surah with ID ${surahId} not found`);
@@ -49,18 +51,18 @@ export class StubQuranApiProvider implements QuranApiProvider {
       {
         id: 1,
         surah: 1,
-        verse: 1
+        verse: 1,
       },
       {
         id: 2,
         surah: 2,
-        verse: 142
+        verse: 142,
       },
       {
         id: 3,
         surah: 2,
-        verse: 253
-      }
+        verse: 253,
+      },
     ];
   }
 }
